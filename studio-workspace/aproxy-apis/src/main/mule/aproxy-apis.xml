@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="aproxy-apisFlow" doc:id="d5e3f676-7c81-4acf-b323-4e9596240cd5" >
+		<logger level="INFO" doc:name="Logger" doc:id="210a418c-0d65-47e5-9025-4aadde6a43d9" message="proxy flow started"/>
+		<set-payload value="This is sample proxy api" doc:name="Set Payload" doc:id="7b1bbced-0d89-4f99-97b9-74c6974794e1" />
+		<logger level="INFO" doc:name="Logger" doc:id="2787b493-accc-4d65-8b72-0d07c726c6be" message="#[payload]"/>
+	</flow>
+</mule>

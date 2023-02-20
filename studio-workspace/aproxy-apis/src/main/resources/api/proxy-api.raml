@@ -1,0 +1,31 @@
+#%RAML 1.0
+title: proxy-api
+/request:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            examples:
+              {
+    "totalSize": 10,
+    "done": true,
+    "records": [
+        {
+            "attributes": {
+                "type": "serviceId__c",
+                "url": "/services/data/v42.0/sobjects/serviceId__c/a022w00000hf48NAAQ"
+            },
+            "Country__c": "CA",
+            "Id": "a022w00000hf48NAAQ",
+            "Limestone_Project_ID__c": "FC-1000712"
+        },
+        {
+            "attributes": {
+                "type": "serviceId__c",
+                "url": "/services/data/v42.0/sobjects/serviceId__c/a022w00000hf48OAAQ"
+            },
+            "Country__c": "US",
+            "Id": "a022w00000hf48OAAQ",
+            "Limestone_Project_ID__c": "KI-1000292"
+        } ] }

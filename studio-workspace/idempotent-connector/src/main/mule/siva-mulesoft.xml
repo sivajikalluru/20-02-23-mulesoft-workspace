@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:os="http://www.mulesoft.org/schema/mule/os"
+	xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="e785c10e-e365-4e0d-94d7-276f7396f5bf" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<os:config name="ObjectStore_Config" doc:name="ObjectStore Config" doc:id="764d0b06-e628-43fb-ac77-99346a6d087c" >
+		<os:connection />
+	</os:config>
+	<os:object-store name="Object_store" doc:name="Object store" doc:id="5ffc8a42-7251-479e-965c-d25398f9d857" maxEntries="100" entryTtl="20" config-ref="ObjectStore_Config" failIfPresent="false" errorMappings="" failOnNullValue="true" objectStore="" value="#[payload]" key="secure" />
+	<flow name="siva-mulesoftFlow" doc:id="4a734e3d-4c82-4a29-ba28-841796ab7163" >
+		<http:listener doc:name="Listener" doc:id="f852226f-a0ce-4ed2-b6b2-4682222b8499" config-ref="HTTP_Listener_config" path="/siva"/>
+		<logger level="INFO" doc:name="Logger" doc:id="3a21b98a-ef1f-45cd-b3f3-37dd61c8f604" message="#[payload]"/>
+		<idempotent-message-validator doc:name="Idempotent Message Validator" doc:id="b286817b-b003-4db4-935a-098104c0aea3" idExpression="#[attributes.queryParams.name]" objectStore="Object_store"/>
+		<ee:transform doc:name="Transform Message" doc:id="62729b27-9483-48e5-8792-e7469fdd8abe" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="e159da87-7844-493e-9f26-66e5eab1021b" message="#[payload]"/>
+	</flow>
+</mule>
