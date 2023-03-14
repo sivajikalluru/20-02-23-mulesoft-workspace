@@ -12,7 +12,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
 	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="77f9bacb-c2c4-4044-9fad-4ad1352cef39" >
-		<salesforce:basic-connection username="sivanjaneyuluk.in@mouritech.com" password="Siva@78654321" securityToken="Sgx9aA1x8TeTm3rRALYNneQO" />
+		<salesforce:basic-connection username="si" password="s" securityToken="S" />
 	</salesforce:sfdc-config>
 	<file:config name="File_Config" doc:name="File Config" doc:id="ef604ccd-50d4-4293-940b-041968feed7d" >
 		<file:connection workingDir="C:\Users" />
